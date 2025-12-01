@@ -14,8 +14,8 @@ export const handler = async (event) => {
     try {
         const { gmb_id, campaign_id, scheduleName, organizationId } = event.detail || event;
 
-        if (!campaign_id || !scheduleName || !organizationId) {
-            throw new Error('Missing required parameters: campaign_id, scheduleName, organizationId');
+        if (!campaign_id || !scheduleName || !organizationId || !gmb_id) {
+            throw new Error('Missing required parameters: campaign_id, scheduleName, organizationId, gmb_id');
         }
 
         const url = `https://api.brightlocal.com/manage/v1/citation-builder/${campaign_id}/lookup`;
