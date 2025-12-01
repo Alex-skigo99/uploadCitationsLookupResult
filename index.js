@@ -12,7 +12,7 @@ export const handler = async (event) => {
     console.log(`🚀 Upload citation lookup result Event: ${JSON.stringify(event)}`);
     
     try {
-        const { campaign_id, scheduleName, organizationId } = event.detail || event;
+        const { gmb_id, campaign_id, scheduleName, organizationId } = event.detail || event;
 
         if (!campaign_id || !scheduleName || !organizationId) {
             throw new Error('Missing required parameters: campaign_id, scheduleName, organizationId');
@@ -63,7 +63,7 @@ export const handler = async (event) => {
             await WebsocketUtils.broadcastWebsocketMessageToOrganization(
                 organizationId,
                 WebSocketFlags.CITATION_LOOKUP_SUCCESS,
-                { campaign_id, lookup_status },
+                { campaign_id, lookup_status, gmb_id },
                 response,
             );
             console.log(`✅ Successfully broadcasted websocket message for organization: ${organizationId}`);
